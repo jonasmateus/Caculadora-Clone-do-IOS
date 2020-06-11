@@ -2,9 +2,9 @@ import React, { Component } from "react"
 import { evaluate } from "mathjs"
 import "./calc.css"
 
-let inicialstate = {
-   number: "",
-   expression: 0
+let inicialState = {
+   mathResult: 0,
+   caractereExpression: ""
 }
 
 
@@ -15,41 +15,44 @@ export default class calc extends Component {
 
     super(props)
 
-        this.state = {...inicialstate} 
+        this.state = {...inicialState} 
 
     }
 
     zerar () {
         
-        inicialstate = {
-            number: "",
-            expression: 0
+        inicialState = {
+            mathResult: 0,
+            caractereExpression: ""
         }
 
-        this.setState({...inicialstate})
+        this.setState({...inicialState})
 
     }
 
     digito (event) {
 
-        let nd = inicialstate.number + event.target.innerHTML
+        inicialState.caractereExpression = inicialState.caractereExpression === 0 ? "" : inicialState.caractereExpression
 
-        inicialstate.number = nd
-        inicialstate.expression = nd
+        let inputExpression = inicialState.caractereExpression + event.target.innerHTML
+
+        inicialState.mathResult = inputExpression
+        inicialState.caractereExpression = inputExpression
 
         try {
             if (event.target.innerHTML === "="){
     
-                let string = nd.replace("=", "")
-                inicialstate.expression = evaluate(string)
-                inicialstate.number = inicialstate.expression
+                let filteredExpression = inputExpression.replace("=", "")
+                inicialState.caractereExpression = evaluate(filteredExpression)
+
+                inicialState.mathResult = inicialState.caractereExpression
                 
             }
-            this.setState({...inicialstate})
+            this.setState({...inicialState})
 
         }
         catch {
-            alert("Invalid expression!")
+            alert("Invalid caractereEspression!")
            
         }
 
@@ -60,7 +63,7 @@ export default class calc extends Component {
     return (<div>
         <h1>Calculadora</h1>
         <div className="calc">
-        <div className="display">{this.state.expression}</div>
+        <div className="display">{this.state.mathResult}</div>
         <button lable="AC"onClick={ e => this.zerar(e)  }>{"AC"}</button >
         <button lable="/" onClick={ e => this.digito(e) }>{"/"}</button >
         <button lable="7" onClick={ e => this.digito(e) }>{"7"}</button >

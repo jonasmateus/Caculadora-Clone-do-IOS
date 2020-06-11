@@ -19,7 +19,11 @@ export default class calc extends Component {
 
     }
 
+<<<<<<< HEAD
     resetCalc () {
+=======
+    emptyCalc () {
+>>>>>>> 5a7d2c561d7e29669eccea8ac344397aff63b853
         
         inicialState = {
             mathResult: 0,
@@ -63,7 +67,11 @@ export default class calc extends Component {
         <h1>Calculadora</h1>
         <div className="calc">
         <div className="display">{this.state.mathResult}</div>
+<<<<<<< HEAD
         <button lable="AC"onClick={ e => this.resetCalc(e)  }>{"AC"}</button >
+=======
+        <button lable="AC"onClick={ e => this.emptyCalc(e)  }>{"AC"}</button >
+>>>>>>> 5a7d2c561d7e29669eccea8ac344397aff63b853
         <button lable="/" onClick={ e => this.addDigit(e) }>{"/"}</button >
         <button lable="7" onClick={ e => this.addDigit(e) }>{"7"}</button >
         <button lable="8" onClick={ e => this.addDigit(e) }>{"8"}</button >
